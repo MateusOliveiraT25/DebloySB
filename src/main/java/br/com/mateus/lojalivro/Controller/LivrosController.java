@@ -23,8 +23,10 @@ public class LivrosController {
     LivroRepository livrosRepository;
 
     @GetMapping("/livros-list")
-    public List<Livro> list() {
-        return (List<Livro>) this.livrosRepository.findAll();    
+    public ModelAndView list() {
+        ModelAndView mv = new ModelAndView("livros-list");
+        mv.addObject("livros", livrosRepository.findAll());
+        return mv; 
     }
 
     @PostMapping("/livros-add")
@@ -32,6 +34,7 @@ public class LivrosController {
         ModelAndView mv = new ModelAndView("livros-add");
         livrosRepository.save(livro);
          this.livrosRepository.save(livro);
+         mv.setViewName("redirect:/livro-list");
          return mv; 
     }
 }
