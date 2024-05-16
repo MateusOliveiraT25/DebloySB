@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import br.com.mateus.lojalivro.Model.Livro;
 import br.com.mateus.lojalivro.Repository.LivroRepository;
@@ -21,13 +22,16 @@ public class LivrosController {
     @Autowired
     LivroRepository livrosRepository;
 
-    @GetMapping("/livros")
+    @GetMapping("/livros-list")
     public List<Livro> list() {
         return (List<Livro>) this.livrosRepository.findAll();    
     }
 
-    @PostMapping("/livros")
-    public Livro create(@RequestBody Livro livro) {
-        return this.livrosRepository.save(livro);
+    @PostMapping("/livros-add")
+    public ModelAndView create(@RequestBody Livro livro) {
+        ModelAndView mv = new ModelAndView("livros-add");
+        livrosRepository.save(livro);
+         this.livrosRepository.save(livro);
+         return mv; 
     }
 }
