@@ -23,7 +23,11 @@ public class indexController {
         ModelAndView mv = new ModelAndView("livros-add");
         return mv;
     }
-   
+    @GetMapping("/livros-list")
+    public ModelAndView getLivroList() {
+        ModelAndView mv = new ModelAndView("livros-list");
+        return mv;
+    }
     @GetMapping("/contato")
     public ModelAndView PageContato() {
         ModelAndView mv = new ModelAndView("contato");
